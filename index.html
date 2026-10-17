@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NFO Forge: make and show your own .nfo</title>
+<meta name="description" content="A fork-it-yourself maker and viewer for scene-style .nfo files. Pure browser, no build step, no tracking.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>NFO FORGE</h1>
+  <p>Make and show your own .nfo. Fork it, edit a JSON file, host it on GitHub Pages.</p>
+</header>
+<main>
+  <section class="panel" aria-label="Editor">
+    <h2>Start from</h2>
+    <div class="btns">
+      <button type="button" data-template="templates/blank.json">Blank</button>
+      <button type="button" data-template="templates/release-2026.json">2026 Release</button>
+    </div>
+    <label for="loadJson">Load your saved .json</label><input id="loadJson" type="file" accept=".json,application/json">
+
+    <h2 style="margin-top:18px">Layout</h2>
+    <div class="row">
+      <div><label for="width">Width (40-120)</label><input id="width" type="number" min="40" max="120" value="79"></div>
+      <div><label for="border">Border</label><select id="border"><option>double</option><option>single</option><option>block</option><option>ascii</option><option>none</option></select></div>
+    </div>
+    <div class="row">
+      <div><label for="shade">Shade bars</label><select id="shade"><option>light</option><option>medium</option><option>dark</option><option>full</option><option>none</option></select></div>
+      <div><label for="logo">Block logo (A-Z, 0-9)</label><input id="logo" maxlength="14"></div>
+    </div>
+    <label for="title">Title</label><input id="title">
+    <label for="tagline">Tagline</label><input id="tagline">
+
+    <h2 style="margin-top:18px">Fields</h2>
+    <div id="fields"></div>
+    <button type="button" id="addField">Add field</button>
+
+    <details open><summary>Sections (JSON)</summary>
+      <label for="sections">Array of {"heading","body"}</label><textarea id="sections" spellcheck="false"></textarea>
+    </details>
+    <label for="greets">Greetings (one per line)</label><textarea id="greets"></textarea>
+    <label for="footer">Footer</label><input id="footer">
+
+    <details><summary>SAUCE metadata (what viewers show)</summary>
+      <label for="s_title">Title (35 max)</label><input id="s_title">
+      <div class="row"><div><label for="s_author">Author (20 max)</label><input id="s_author"></div><div><label for="s_group">Group (20 max)</label><input id="s_group"></div></div>
+      <label for="s_date">Date</label><input id="s_date" type="date">
+      <label for="s_comments">Comment lines (64 max each)</label><textarea id="s_comments"></textarea>
+    </details>
+  </section>
+
+  <section class="panel" aria-label="Preview">
+    <h2>Preview</h2>
+    <div class="btns" style="margin:0 0 10px">
+      <button type="button" class="primary" id="dlNfo">Download .nfo (CP437)</button>
+      <button type="button" id="dlTxt">Download .txt (UTF-8)</button>
+      <button type="button" id="dlJson">Save as .json</button>
+      <button type="button" id="copy">Copy</button>
+      <select id="theme" aria-label="Colour"><option value="grey">Grey</option><option value="amber">Amber</option><option value="green">Green</option><option value="white">White</option></select>
+    </div>
+    <div class="stage" id="stage"><pre id="out" aria-live="polite"></pre></div>
+    <div id="status" class="status" role="status"></div>
+    <label for="openFile">Or open an existing .nfo to view it (drag and drop works too)</label>
+    <input id="openFile" type="file" accept=".nfo,.diz,.asc,.txt">
+  </section>
+</main>
+<footer>MIT licensed. Nothing you type leaves your browser. No analytics, no cookies.</footer>
+<script src="nfo.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

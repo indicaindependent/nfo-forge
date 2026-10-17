@@ -1,0 +1,30 @@
+:root{--bg:#0b1015;--card:#161e27;--card2:#1e2833;--border:#33424f;--text:#f3f7f9;--muted:#a7b6c2;--teal:#2dd4e8;--amber:#f5a524;--green:#4ade80;--red:#fb7185}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--teal)}
+header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:12px;align-items:baseline}
+header h1{margin:0;font-size:20px;letter-spacing:.08em}
+header p{margin:0;color:var(--muted)}
+main{display:grid;grid-template-columns:minmax(300px,420px) minmax(0,1fr);gap:20px;padding:20px 24px;max-width:1500px;margin:0 auto}
+@media(max-width:900px){main{grid-template-columns:minmax(0,1fr);padding:14px 12px}}
+.panel{min-width:0}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+.panel h2{margin:0 0 10px;font-size:13px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+label{display:block;margin:10px 0 4px;font-size:12px;color:var(--muted)}
+input,select,textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font:inherit}
+textarea{min-height:90px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+button{background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font:inherit;cursor:pointer}
+button.primary{background:var(--teal);color:#06242a;border-color:var(--teal);font-weight:600}
+button:hover{border-color:var(--teal)}
+.stage{background:#000;border:1px solid var(--border);border-radius:8px;padding:14px;overflow:auto}
+pre#out{margin:0;color:#d8dde0;font-family:"Cascadia Mono","Perfect DOS VGA 437","Px437 IBM VGA 8x16","DejaVu Sans Mono",Menlo,Consolas,monospace;font-size:14px;line-height:1.05;white-space:pre;letter-spacing:0}
+.theme-amber pre#out{color:#ffb000}.theme-green pre#out{color:#33ff66}.theme-white pre#out{color:#fff}
+.status{margin-top:10px;font-size:13px;color:var(--muted);min-height:1.4em}
+.status.warn{color:var(--amber)}.status.bad{color:var(--red)}.status.good{color:var(--green)}
+.fieldrow{display:grid;grid-template-columns:1fr 2fr auto;gap:6px;margin-bottom:6px}
+.fieldrow button{padding:4px 10px}
+details{margin-top:12px}summary{cursor:pointer;color:var(--muted)}
+footer{padding:20px 24px;color:var(--muted);border-top:1px solid var(--border);font-size:13px}
