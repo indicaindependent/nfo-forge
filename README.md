@@ -1,6 +1,6 @@
 # NFO Forge
 
-Make, show and sign your own `.nfo` release file. Fork it, edit one JSON file, host it free on GitHub Pages.
+Make, show and sign your own `.nfo` release file, or turn a picture into text art. Fork it, edit one JSON file, host it free on GitHub Pages.
 
 The `.nfo` was the little text file that came with a release in the 1990s: a boxed block-letter logo, a name, a date, a few honest lines about what it was and who made it. This tool builds that file properly. You get real CP437 bytes and a SAUCE metadata record on the end, the way the originals were made, and it opens any existing `.nfo` and reads the SAUCE back.
 
@@ -14,6 +14,26 @@ The `.nfo` was the little text file that came with a release in the 1990s: a box
 4. Download the `.nfo`, or save the `.json` so you can keep editing it later.
 
 No build step, no dependencies, no tracking. Nothing you type leaves your browser. Open `index.html` over any static server to run it locally, for example `python3 -m http.server`.
+
+## Turn a picture into text art
+
+Open the **Picture** tab, choose an image, and pick a style. The image is read by your browser and never uploaded.
+
+| Style | What you get |
+|---|---|
+| Painted symbols | Ordinary keyboard symbols chosen by measured ink density, with a different symbol in neighbouring cells so it reads as hand-painted, not banded. Pure ASCII. |
+| Shade blocks | Four-level shading in CP437 block characters. |
+| Half blocks | Doubles the vertical detail. With colour on, each cell carries two colours, one for the upper pixel and one for the lower. |
+| Character ramp | Light to dark ASCII, plain and portable. |
+| Outline | A line drawing taken from the strong edges. |
+
+Width runs from 20 to 120 columns, with contrast, brightness and invert controls. Save as:
+
+- **`.ans`** for 16-colour ANSI in the standard VGA palette, with a SAUCE record (EOF byte, then 128 bytes).
+- **`.txt`** for the plain text, exactly as shown in the preview.
+- **`.nfo`** for CP437 bytes with SAUCE, the same file the text-release maker writes.
+
+Colour is limited to the 16 VGA colours because that is what the `.ans` format carries, so photographs are approximated, not reproduced.
 
 ## Make it yours
 
@@ -56,9 +76,15 @@ The finished `.nfo` files and dark and light images are in `docs/`.
 
 ```
 node test.js
+node test-art.js
+node test-ansi.js
+node test-fonts.js
+node test-paint.js
 ```
 
-Runs the engine tests: the CP437 table over all 128 high bytes, exact line width across widths, borders and shades, word wrap that never loses a character, greeting packing, and the SAUCE record checked byte by byte. The browser layer is exercised separately in a headless browser before each release.
+`test.js` runs the engine tests: the CP437 table over all 128 high bytes, exact line width across widths, borders and shades, word wrap that never loses a character, greeting packing, and the SAUCE record checked byte by byte. The others cover the picture converters, the ANSI writer (checked against an independent decoder), the lettering styles, and the symbol painter, including a regression test for a bug where a run of one tone printed as a single repeated symbol.
+
+The browser layer is tested in a headless browser with `test-ui-text.py` and `test-ui-picture.py` (they need Playwright and a local server on port 8765).
 
 ## A short history, and what this is not
 
