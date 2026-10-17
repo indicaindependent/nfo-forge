@@ -1,5 +1,9 @@
 // Tone map of the leaf with real light and shade, painted with keyboard symbols.
-const leaf = require("./leaf.js"), A = require("./art.js"), P = require("./painter.js");
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("./leaf.js"), require("./art.js"));
+  else root.NFOPaintLeaf = factory(root.NFOLeaf, root.NFOArt);
+})(typeof self !== "undefined" ? self : this, function (leaf, A) {
+"use strict";
 function toneMap(cols, rows) {
   const img = leaf(cols * 16, rows * 32, { ink: true }), sm = A.resample(img, cols, rows * 2), tones = [];
   // Averaging dilutes thin features. The rim is about 9 source pixels wide inside a 16-pixel cell, so the
@@ -37,9 +41,5 @@ function toneMap(cols, rows) {
   }
   return tones;
 }
-module.exports = { toneMap };
-if (require.main === module) {
-  const cols = +process.argv[2] || 64, rows = +process.argv[3] || 37;
-  const t = toneMap(cols, rows);
-  console.log(P.paint(t, { set: "punct", seed: 7 }).join("\n"));
-}
+return { toneMap: toneMap };
+});
