@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NFO Forge: make and show your own .nfo</title>
-<meta name="description" content="A fork-it-yourself maker and viewer for scene-style .nfo files. Pure browser, no build step, no tracking.">
+<meta name="description" content="A fork-it-yourself maker and viewer for scene-style .nfo files, and a picture-to-text-art converter with 16-colour ANSI output. Pure browser, no build step, no tracking.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,8 +12,43 @@
   <h1>NFO FORGE</h1>
   <p>Make and show your own .nfo. Fork it, edit a JSON file, host it on GitHub Pages.</p>
 </header>
+<nav class="tabs" aria-label="Mode">
+  <button type="button" id="tabText" class="tab on" aria-pressed="true">Text release</button>
+  <button type="button" id="tabPic" class="tab" aria-pressed="false">Picture</button>
+</nav>
 <main>
-  <section class="panel" aria-label="Editor">
+  <section class="panel" aria-label="Picture" id="picturePanel" hidden>
+    <h2>Picture</h2>
+    <label for="picFile">Choose an image (PNG, JPEG, GIF, WebP). It stays in your browser.</label>
+    <input id="picFile" type="file" accept="image/*">
+    <label for="picMode">Style</label>
+    <select id="picMode"></select>
+    <div id="picNote" class="status"></div>
+    <div class="row">
+      <div><label for="picCols">Width (20-120)</label><input id="picCols" type="number" min="20" max="120" value="76"></div>
+      <div><label for="picSymbols">Symbol set</label><select id="picSymbols"><option value="punct">Punctuation</option><option value="mixed">Punctuation and digits</option><option value="classic">Everything</option></select></div>
+    </div>
+    <div class="row">
+      <div><label for="picContrast">Contrast</label><input id="picContrast" type="range" min="-50" max="80" value="20"></div>
+      <div><label for="picBright">Brightness</label><input id="picBright" type="range" min="-40" max="40" value="0"></div>
+    </div>
+    <div class="row">
+      <div><label><input type="checkbox" id="picInvert" style="width:auto"> Invert</label></div>
+      <div><label><input type="checkbox" id="picColour" style="width:auto"> 16-colour (.ans)</label></div>
+    </div>
+    <label for="picTitle">Title (35 max)</label><input id="picTitle" maxlength="35">
+    <div class="row">
+      <div><label for="picAuthor">Author (20 max)</label><input id="picAuthor" maxlength="20"></div>
+      <div><label for="picGroup">Group (20 max)</label><input id="picGroup" maxlength="20"></div>
+    </div>
+    <div class="btns">
+      <button type="button" class="primary" id="picDlAns">Download .ans (colour)</button>
+      <button type="button" id="picDlTxt">Download .txt</button>
+      <button type="button" id="picDlNfo">Download .nfo (CP437)</button>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Editor" id="editorPanel">
     <h2>Start from</h2>
     <div class="btns">
       <button type="button" data-template="templates/blank.json">Blank</button>
@@ -68,6 +103,12 @@
 </main>
 <footer>MIT licensed. Nothing you type leaves your browser. No analytics, no cookies.</footer>
 <script src="nfo.js"></script>
+<script src="art.js"></script>
+<script src="ansi.js"></script>
+<script src="density.js"></script>
+<script src="painter.js"></script>
+<script src="picture.js"></script>
 <script src="app.js"></script>
+<script src="app2.js"></script>
 </body>
 </html>
