@@ -28,3 +28,11 @@ pre#out{margin:0;color:#d8dde0;font-family:"Cascadia Mono","Perfect DOS VGA 437"
 .fieldrow button{padding:4px 10px}
 details{margin-top:12px}summary{cursor:pointer;color:var(--muted)}
 footer{padding:20px 24px;color:var(--muted);border-top:1px solid var(--border);font-size:13px}
+
+.tabs{display:flex;gap:8px;padding:12px 24px 0;max-width:1500px;margin:0 auto}
+.tab{background:transparent;border-color:transparent;border-bottom:2px solid transparent;border-radius:0;color:var(--muted)}
+.tab.on{color:var(--text);border-bottom-color:var(--teal)}
+[hidden]{display:none!important}
+input[type=range]{padding:0}
+.stage.ansi pre#out{color:inherit}
+.stage.ansi{background:#000}

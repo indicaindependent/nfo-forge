@@ -9,7 +9,10 @@
  */
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory(require("./ascii-density.json"));
-  else root.NFOPainter = factory(root.NFO_DENSITY);
+  else {
+    if (!root.NFO_DENSITY) throw new Error("NFOPainter needs density.js loaded first (it defines NFO_DENSITY).");
+    root.NFOPainter = factory(root.NFO_DENSITY);
+  }
 })(typeof self !== "undefined" ? self : this, function (DENSITY) {
   "use strict";
   // Sets of symbols the painter may use. "classic" is the symbols scene artists leaned on.
