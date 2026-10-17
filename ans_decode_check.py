@@ -3,6 +3,8 @@
 import re, json, sys
 SGR2DOS = {0: 0, 1: 4, 2: 2, 3: 6, 4: 1, 5: 5, 6: 3, 7: 7}
 d = open(sys.argv[1], "rb").read()
+# The EOF byte 0x1A ends the art; anything after it is the SAUCE record, not picture data.
+if b"\x1a" in d: d = d[:d.index(b"\x1a")]
 fg, bg, bold = 7, 0, False
 rows = [[]]
 i = 0
