@@ -33,6 +33,17 @@ Everything about your release lives in one JSON file. Copy `templates/blank.json
 
 The official 2026 release file for this project is `templates/release-2026.json`. Open it with `?t=release-2026`.
 
+Templates that ship with it:
+
+| Open with | What it is |
+|---|---|
+| `?t=blank` | The generic starting point. |
+| `?t=release-2026` | The release file for NFO Forge itself. |
+| `?t=iim` | The Indica Independent Media release file, 79 columns. |
+| `?t=iim-mini` | The compact 46-column badge shown on the profile page. |
+
+The finished `.nfo` files and dark and light images are in `docs/`.
+
 ## What it guarantees, and what it does not
 
 - **Every line is exactly as wide as you asked.** The renderer checks this and reports any line that is not.
