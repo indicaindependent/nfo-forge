@@ -1,0 +1,22 @@
+{
+  "_about": "The compact IIM badge. Small enough to read at the bottom of a profile page.",
+  "width": 46,
+  "border": "double",
+  "shade": "light",
+  "logo": "IIM",
+  "title": "INDICA INDEPENDENT MEDIA",
+  "tagline": "100% Creative Clarity",
+  "fields": [
+    ["Type", "Open intelligence, in the open"],
+    ["Home", "osintnet.uk"],
+    ["Made with", "NFO Forge. Make your own"]
+  ],
+  "footer": "fork it  ::  sign it  ::  2026",
+  "sauce": {
+    "title": "IIM badge",
+    "author": "Indica Independent",
+    "group": "Indica Independent",
+    "date": "20261017",
+    "comments": ["Compact IIM release file made with NFO Forge."]
+  }
+}

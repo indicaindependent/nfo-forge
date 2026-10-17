@@ -1,0 +1,89 @@
+{
+  "_about": "The Indica Independent Media release NFO. Every line comes from the public profile and hub pages.",
+  "width": 79,
+  "border": "double",
+  "shade": "light",
+  "logo": "IIM",
+  "title": "I N D I C A   I N D E P E N D E N T   M E D I A",
+  "tagline": "open intelligence, built in the open",
+  "fields": [
+    [
+      "Group",
+      "Indica Independent Media"
+    ],
+    [
+      "Motto",
+      "100% Creative Clarity"
+    ],
+    [
+      "Type",
+      "Open intelligence research and software"
+    ],
+    [
+      "Home",
+      "osintnet.uk"
+    ],
+    [
+      "Source",
+      "github.com/indicaindependent"
+    ],
+    [
+      "Bluesky",
+      "@indica.osintnet.uk"
+    ],
+    [
+      "License",
+      "Open source, MIT where marked"
+    ],
+    [
+      "Protection",
+      "None. Everything here is public. Read it, check it"
+    ]
+  ],
+  "sections": [
+    {
+      "heading": "What we do",
+      "body": "Open intelligence research, reporting, and the software that makes both usable by someone who cannot buy a terminal. The reasoning is published so you can audit it instead of trusting a black box."
+    },
+    {
+      "heading": "The work",
+      "lines": [
+        "WarHeatMap   live global conflict map, one page per event",
+        "Tuck         congressional trades and disclosure data, handed back",
+        "VoxTerrae    the door from the map to the room",
+        "AXIOM        autonomous community security, method published",
+        "Ka-Tet       six AI agents and one human holding a system upright",
+        "VibeMaestro  one conductor for a whole ecosystem of AI-native apps"
+      ]
+    },
+    {
+      "heading": "House rules",
+      "lines": [
+        "No login, no paywall, no ads, no tracking on the tools we ship.",
+        "The method is public even where the calibration is not.",
+        "A claim gets a source or it does not get published."
+      ]
+    },
+    {
+      "heading": "Make your own",
+      "body": "This file was made with NFO Forge, a free page that builds scene-style release files in your browser. Fork it and sign your own work: indicaindependent.github.io/nfo-forge"
+    }
+  ],
+  "greets": [
+    "everyone who reads the source",
+    "the people who check the claim",
+    "the scene that taught us to sign our work"
+  ],
+  "footer": "Indica Independent Media  ::  100% Creative Clarity  ::  2026",
+  "sauce": {
+    "title": "Indica Independent Media",
+    "author": "Indica Independent",
+    "group": "Indica Independent",
+    "date": "20261017",
+    "comments": [
+      "Open intelligence, built in the open.",
+      "100% Creative Clarity.",
+      "Made with NFO Forge. Fork it and sign your own."
+    ]
+  }
+}
