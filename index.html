@@ -41,6 +41,17 @@
       <div><label for="picAuthor">Author (20 max)</label><input id="picAuthor" maxlength="20"></div>
       <div><label for="picGroup">Group (20 max)</label><input id="picGroup" maxlength="20"></div>
     </div>
+    <details id="leafBox">
+      <summary>Leaf showcase (80 columns, keyboard symbols only)</summary>
+      <label for="leafTitle">Title (76 max)</label><input id="leafTitle" maxlength="76" placeholder="INDICA INDEPENDENT MEDIA">
+      <div class="row">
+        <div><label for="leafLetters">Letters (1-5, A-Z 0-9)</label><input id="leafLetters" maxlength="5" placeholder="IIM"></div>
+        <div><label for="leafSeed">Texture seed</label><input id="leafSeed" type="number" min="1" max="99" value="7"></div>
+      </div>
+      <label for="leafTag">Tagline (76 max)</label><input id="leafTag" maxlength="76" placeholder="100% CREATIVE CLARITY">
+      <div class="btns"><button type="button" id="leafMake">Paint the leaf</button></div>
+      <div class="status" id="leafStatus">Takes about two seconds. The page stays responsive while it paints.</div>
+    </details>
     <div class="btns">
       <button type="button" class="primary" id="picDlAns">Download .ans (colour)</button>
       <button type="button" id="picDlTxt">Download .txt</button>
@@ -108,6 +119,10 @@
 <script src="density.js"></script>
 <script src="painter.js"></script>
 <script src="picture.js"></script>
+<script src="fonts.js"></script>
+<script src="leaf.js"></script>
+<script src="paint-leaf.js"></script>
+<script src="showcase.js"></script>
 <script src="app.js"></script>
 <script src="app2.js"></script>
 </body>

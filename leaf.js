@@ -1,7 +1,12 @@
 // Procedural cannabis leaf: 7 serrated leaflets fanning from a petiole. Pure geometry, no source art.
 // Returns an RGBA image {width,height,data}. Brightness encodes depth: veins bright, blade mid, edge dark.
-const A = require("./art.js");
-function leaf(W, H, o = {}) {
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("./art.js"));
+  else root.NFOLeaf = factory(root.NFOArt);
+})(typeof self !== "undefined" ? self : this, function (A) {
+"use strict";
+function leaf(W, H, o) {
+  o = o || {};
   const INK = !!o.ink;                            // ink mode: blade dense, veins light, rim darkest (for symbol painting)
   const d = new Uint8ClampedArray(W * H * 4);
   const cx = W / 2, cy = H * 0.80;                 // hub where leaflets meet
@@ -61,11 +66,5 @@ function leaf(W, H, o = {}) {
   }
   return { width: W, height: H, data: d };
 }
-module.exports = leaf;
-if (require.main === module) {
-  const img = leaf(640, 640);
-  for (const [name, o] of [["shade+dither", { mode: "shade", dither: true }], ["half", { mode: "half", dither: true }]]) {
-    const r = A.convert(img, { cols: 78, contrast: 18, ...o });
-    console.log("---", name, r.cols + "x" + r.rows); console.log(r.lines.join("\n"));
-  }
-}
+return leaf;
+});

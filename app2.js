@@ -41,6 +41,9 @@
     return r;
   }
 
+  // The leaf is not a live preview of the controls, so saving it must not re-render the picture over it.
+  function current() { return last && last.mode === "leaf" ? last : render(); }
+
   function loadFile(f) {
     if (!f) return;
     if (!/^image\//.test(f.type)) { setStatus("That file is not an image.", "bad"); return; }
@@ -69,7 +72,44 @@
     if (pic) { render(); } else { $("stage").className = "stage theme-" + $("theme").value; if (window.dispatchEvent) $("width").dispatchEvent(new Event("input")); }
   }
 
+  // ---- Leaf showcase -------------------------------------------------------------------------------------------
+  // The leaf takes about two seconds to paint, so it runs in a Web Worker and the page never freezes. Results are cached by
+  // their options: changing nothing, or going back to an earlier setting, costs nothing. If Workers are unavailable it
+  // falls back to a direct call, which blocks the page for those two seconds, and the status line says so.
+  var worker = null, jobId = 0, leafCache = {}, leafBusy = false;
+  function leafOpts() {
+    return { title: $("leafTitle").value.trim(), letters: $("leafLetters").value.trim(), tagline: $("leafTag").value.trim(), seed: parseInt($("leafSeed").value, 10) || 7 };
+  }
+  function leafKey(o) { return JSON.stringify([o.title, o.letters, o.tagline, o.seed]); }
+  function showLeaf(res) {
+    last = { lines: res.lines, cols: res.cols, rows: res.rows, mode: "leaf", colors: null };
+    $("stage").className = "stage theme-" + $("theme").value;
+    $("out").textContent = res.lines.join("\n");
+    var enc = NFO.cp437Encode(res.lines.join("\n"), true);
+    setStatus(res.cols + " x " + res.rows + " cells. Keyboard symbols only." + (enc.lossy.length ? " Not in CP437: " + enc.lossy.join(" ") : ""), enc.lossy.length ? "warn" : "good");
+  }
+  function paintLeaf() {
+    if (leafBusy) return;
+    var o = leafOpts(), key = leafKey(o), ls = $("leafStatus");
+    if (leafCache[key]) { showLeaf(leafCache[key]); ls.textContent = "Shown from cache."; return; }
+    leafBusy = true; $("leafMake").disabled = true; ls.textContent = "Painting. The page stays usable while this runs.";
+    var done = function (res, ms) { leafCache[key] = res; leafBusy = false; $("leafMake").disabled = false; ls.textContent = "Painted in " + (ms / 1000).toFixed(1) + " s."; showLeaf(res); };
+    var fail = function (msg) { leafBusy = false; $("leafMake").disabled = false; ls.textContent = "Could not paint the leaf: " + msg; setStatus("Leaf failed: " + msg, "bad"); };
+    var t0 = performance.now();
+    try { if (!worker) worker = new Worker("showcase-worker.js"); } catch (e) { worker = null; }
+    if (worker) {
+      var id = ++jobId;
+      worker.onmessage = function (e) { if (e.data.id !== id) return; e.data.ok ? done(e.data.result, performance.now() - t0) : fail(e.data.error); };
+      worker.onerror = function (e) { worker = null; fail(e.message || "the background worker failed to load"); };
+      worker.postMessage({ id: id, opts: o });
+    } else {
+      ls.textContent = "No background worker available, painting directly. The page may pause for a couple of seconds.";
+      setTimeout(function () { try { done(NFOShowcase.compose(o), performance.now() - t0); } catch (e) { fail(String(e.message || e)); } }, 30);
+    }
+  }
+
   function init() {
+    $("leafMake").onclick = paintLeaf;
     NFOPicture.MODES.forEach(function (m) { var o = document.createElement("option"); o.value = m.id; o.textContent = m.label; $("picMode").appendChild(o); });
     var noteFor = function () { var m = NFOPicture.MODES.filter(function (x) { return x.id === $("picMode").value; })[0]; $("picNote").textContent = m ? m.note : ""; $("picSymbols").disabled = $("picMode").value !== "paint"; };
     noteFor();
@@ -77,19 +117,19 @@
     $("tabPic").onclick = function () { show(true); };
     $("picFile").onchange = function (e) { loadFile(e.target.files[0]); };
     ["picMode", "picCols", "picSymbols", "picContrast", "picBright", "picInvert", "picColour"].forEach(function (id) {
-      $(id).addEventListener("input", function () { noteFor(); if (!$("picturePanel").hidden) render(); });
+      $(id).addEventListener("input", function () { noteFor(); if (!$("picturePanel").hidden) { if (last && last.mode === "leaf") last = null; render(); } });
     });
     // The shared output toolbar's Theme select should also refresh a mono picture.
     $("theme").addEventListener("change", function () { if (!$("picturePanel").hidden && last && !last.colors) $("stage").className = "stage theme-" + $("theme").value; });
 
-    $("picDlTxt").onclick = function () { var r = render(); if (!r) return; download(slug() + ".txt", new TextEncoder().encode(r.lines.join("\n") + "\n"), "text/plain;charset=utf-8"); };
+    $("picDlTxt").onclick = function () { var r = current(); if (!r) return; download(slug() + ".txt", new TextEncoder().encode(r.lines.join("\n") + "\n"), "text/plain;charset=utf-8"); };
     $("picDlNfo").onclick = function () {
-      var r = render(); if (!r) return;
+      var r = current(); if (!r) return;
       var f = NFO.toFile({ text: r.lines.join("\n"), lines: r.lines, width: r.cols }, { title: $("picTitle").value, author: $("picAuthor").value, group: $("picGroup").value, date: "", comments: [] });
       download(slug() + ".nfo", f.bytes);
     };
     $("picDlAns").onclick = function () {
-      var r = render(); if (!r) return;
+      var r = current(); if (!r) return;
       var f = NFOAnsi.toFile(r.lines, r.colors || null, { title: $("picTitle").value, author: $("picAuthor").value, group: $("picGroup").value, comments: [] });
       download(slug() + ".ans", f.bytes);
     };

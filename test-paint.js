@@ -36,7 +36,7 @@ ok("different seeds change the texture", P.paint([Array(60).fill(0.5)], { set: "
   ok("browser painter without density.js throws a clear error", threw && /density\.js/.test(threw), threw);
   const ctx = { self: {} }; vm.runInNewContext(fs.readFileSync("./density.js", "utf8"), ctx); vm.runInNewContext(fs.readFileSync("./painter.js", "utf8"), ctx);
   ok("browser painter works once density.js is loaded", !!ctx.self.NFOPainter && ctx.self.NFOPainter.paint([[0.5]])[0].length === 1);
-  ok("density.js matches ascii-density.json to 4 places", Object.keys(D).every(k => Math.abs(ctx.self.NFO_DENSITY[k] - D[k]) < 0.0001));
+  ok("density.js matches ascii-density.json EXACTLY (rounding changes which symbol wins)", Object.keys(D).every(k => ctx.self.NFO_DENSITY[k] === D[k]));
 }
 
 // 4. picture module, every style, mono and colour
