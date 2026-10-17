@@ -1,0 +1,25 @@
+{
+  "_about": "The generic starting point. Change any value and reload. Every field is optional.",
+  "width": 79,
+  "border": "double",
+  "shade": "light",
+  "logo": "YOURS",
+  "title": "YOUR RELEASE NAME",
+  "tagline": "a short line about it",
+  "fields": [
+    ["Release", "Name and version"],
+    ["Date", "2026-01-01"],
+    ["Group", "YOUR HANDLE"],
+    ["Type", "Tool / Release / Zine"],
+    ["Platform", "Where it runs"],
+    ["License", "MIT"]
+  ],
+  "sections": [
+    { "heading": "Description", "body": "What it is and why you made it. Write it like you mean it." },
+    { "heading": "Install", "body": "1. Download.  2. Unzip.  3. Run it." },
+    { "heading": "Notes", "body": "Anything else people should know before they use it." }
+  ],
+  "greets": ["friend one", "friend two", "friend three"],
+  "footer": "made with NFO Forge",
+  "sauce": { "title": "Your release", "author": "you", "group": "YOUR HANDLE", "date": "20260101", "comments": [] }
+}

@@ -1,0 +1,104 @@
+{
+  "_about": "The official 2026 release NFO for NFO Forge itself. Every figure in it was measured on the shipped code.",
+  "width": 79,
+  "border": "double",
+  "shade": "light",
+  "logo": "NFO",
+  "title": "N F O   F O R G E   v 1 . 0",
+  "tagline": "make it. show it. fork it. sign it.",
+  "fields": [
+    [
+      "Release",
+      "NFO Forge 1.0.0"
+    ],
+    [
+      "Date",
+      "2026-10-17"
+    ],
+    [
+      "Group",
+      "Indica Independent Media"
+    ],
+    [
+      "Type",
+      "Browser tool, static files"
+    ],
+    [
+      "Platform",
+      "Any modern browser. GitHub Pages ready"
+    ],
+    [
+      "Format",
+      "CP437 .nfo with SAUCE rev 5 metadata"
+    ],
+    [
+      "Size",
+      "About 33 KB, zero dependencies, zero requests"
+    ],
+    [
+      "License",
+      "MIT. Take it. Make it yours"
+    ],
+    [
+      "Protection",
+      "None. Nothing to crack. Fork it"
+    ]
+  ],
+  "sections": [
+    {
+      "heading": "What it is",
+      "body": "A maker and a viewer for scene-style .nfo files. You fill in a form, the page lays out a proper boxed release file with a block-letter logo, and you download real CP437 bytes with a SAUCE record on the end, exactly the way the old release files were built. Drop any existing .nfo onto the page and it reads it back, SAUCE and all."
+    },
+    {
+      "heading": "Why we built it",
+      "body": "The release file was a way to sign your work. A name, a date, a few honest lines about what you made and who helped. That habit deserves to survive. Anyone should be able to publish something and stamp it with their own file, without installing a thing."
+    },
+    {
+      "heading": "Make your own",
+      "lines": [
+        "1. Fork the repo and switch on GitHub Pages.",
+        "2. Copy templates/blank.json, edit the values, reload.",
+        "3. Download the .nfo, or save the .json to keep editing later.",
+        "4. Put your .nfo in your own release. Sign it. Be proud of it."
+      ]
+    },
+    {
+      "heading": "Verified before release",
+      "lines": [
+        "31 of 31 engine tests pass: CP437 round trip of all 128 high bytes,",
+        "exact line width over 90 layout combinations (6 widths, 5 borders,",
+        "3 shade settings), and the SAUCE record checked byte by byte.",
+        "21 of 21 browser checks pass in headless Chromium with no console",
+        "errors. Every row of this file ends on the same pixel column. We",
+        "measured it, we did not eyeball it."
+      ]
+    },
+    {
+      "heading": "Honest limits",
+      "lines": [
+        "Characters outside CP437 save as '?' and the page tells you which.",
+        "SAUCE title, author and group are cut at 35, 20 and 20 characters,",
+        "because the specification says so. Block logos cover A-Z and 0-9.",
+        "No font is bundled. Your own monospace font draws the art."
+      ]
+    }
+  ],
+  "greets": [
+    "everyone who ever signed a release file",
+    "the ANSI and ASCII artists",
+    "the people keeping scene.org alive",
+    "the author of SAUCE, whose 1994 spec still holds"
+  ],
+  "footer": "NFO Forge 1.0.0  ::  Indica Independent Media  ::  MIT",
+  "sauce": {
+    "title": "NFO Forge 1.0.0",
+    "author": "Indica Independent",
+    "group": "Indica Independent",
+    "date": "20261017",
+    "comments": [
+      "Make, show and fork your own .nfo release files.",
+      "CP437 body, SAUCE rev 5 record, MIT licensed.",
+      "Fork it. Sign it. Be proud of it."
+    ]
+  }
+}
